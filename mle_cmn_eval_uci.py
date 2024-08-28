@@ -6,9 +6,7 @@
 
 import jax
 from jax import numpy as jnp
-from jax import random as jr, config, nn, vmap
-from jax import tree_util as jtu
-from jax.scipy.special import logsumexp
+from jax import random as jr, vmap
 
 from benchmarks import (
     create_uci_dataloader,
@@ -20,10 +18,7 @@ from benchmarks import (
 import os
 import time
 import argparse
-import numpy as np
 from functools import partial
-import seaborn as sns
-from matplotlib import pyplot as plt
 
 
 def parse_args():
@@ -131,8 +126,8 @@ if __name__ == "__main__":
     # number of components (discrete latents) in the single hidden (Directed Mixture) layer of the model
     n_components = [args.n_components] * num_layers
 
-    if not os.path.exists("./examples/benchmarks/logging/"):
-        os.makedirs("./examples/benchmarks/logging/")
+    if not os.path.exists("./logging/"):
+        os.makedirs("./logging/")
     exp_name = f"{args.data}-mle-cmn-layers={num_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-train_size={args.train_size}-n_classes={n_classes}"
 
     x_train, y_train = next(iter(train_dataloader))
@@ -161,7 +156,7 @@ if __name__ == "__main__":
 
     if args.log_metrics:
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-metrics" + ".txt",
+            "./logging/" + exp_name + f"-metrics" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
@@ -233,7 +228,7 @@ if __name__ == "__main__":
         )
 
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-runtimes" + ".txt",
+            "./logging/" + exp_name + f"-runtimes" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
