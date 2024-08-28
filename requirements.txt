@@ -26,5 +26,7 @@ PyYAML==6.0.1
 torchvision
 ucimlrepo==0.0.6
 pyparsing==3.1.1
+arviz==0.17.0
+xarray==2023.12.0
 torch
 certifi
