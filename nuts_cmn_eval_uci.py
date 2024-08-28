@@ -5,22 +5,10 @@
 # https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
 
 import jax
-from jax import numpy as jnp
-from jax import random as jr, config, nn, vmap
-from jax.numpy import expand_dims as expand
-
-from benchmarks import create_uci_dataloader, find_uci_stats, fit_cmn_nuts
-
+from jax import random as jr
+from benchmarks import create_uci_dataloader, fit_cmn_nuts
 import os
-import time
 import argparse
-import warnings
-import numpy as np
-from functools import partial
-from torchvision import transforms
-from collections import defaultdict
-import seaborn as sns
-from matplotlib import pyplot as plt
 
 
 def parse_args():
@@ -123,8 +111,8 @@ if __name__ == "__main__":
     # number of components (discrete latents) in the single hidden (Conditional Mixture) layer of the model
     n_components = [args.n_components] * num_layers
 
-    if not os.path.exists("./examples/benchmarks/logging/"):
-        os.makedirs("./examples/benchmarks/logging/")
+    if not os.path.exists("./logging/"):
+        os.makedirs("./logging/")
     exp_name = f"{args.data}-nuts-cmn-layers={num_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-train_size={args.train_size}-n_classes={n_classes}"
 
     x_train, y_train = next(iter(train_dataloader))
@@ -154,7 +142,7 @@ if __name__ == "__main__":
 
     if args.log_metrics:
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-metrics" + ".txt",
+            "./logging/" + exp_name + f"-metrics" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_chains):
