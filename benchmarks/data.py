@@ -184,7 +184,9 @@ class BaseDataset(Dataset):
 def split_raw_data(X, y, train_size, test_size, max_train_size=400, random_state=0):
     """
     split the dataset into train / test split using. We first specify a value of max_train_size
-    because we want to have the same test split when using different
+    because we want to have the same test split when using different train sizes. This is useful
+    because we want to compare the performance of different models trained on differently-sized training sets,
+    but tested on the same test set.
     """
     assert (
         train_size <= max_train_size
