@@ -63,15 +63,15 @@ def check_convergence_expfit(
     """
 
     """
-    dmix-cavi: smooth=False, thr=.15, n_iters_truncate=10
-    dmix-bbvi: smooth=True, thr=.15, window_size=100, n_iters_truncate=1000
+    cmn-cavi: smooth=False, thr=.15, n_iters_truncate=10
+    cmn-bbvi: smooth=True, thr=.15, window_size=100, n_iters_truncate=1000
     moe-ml: smooth=False, thr=.15, n_iters_truncate=2000
     """
 
     """
     goal:
-    dmix-cavi: smooth=False, thr=.1, n_iters_truncate=20 (n_iters=500)
-    dmix-bbvi: smooth=True, thr=.1, window_size=100, n_iters_truncate=2000
+    cmn-cavi: smooth=False, thr=.1, n_iters_truncate=20 (n_iters=500)
+    cmn-bbvi: smooth=True, thr=.1, window_size=100, n_iters_truncate=2000
     moe-ml: smooth=False, thr=0.075, n_iters_truncate=2000 (n_iters=40000)
     """
     # note that n_models is now in the 0-th dimension of losses, which is opposite to the assumptions of `check_convergence` above
@@ -252,7 +252,7 @@ def plot_metrics(
     for i, metric in enumerate(column_list):
         ax = fig.add_subplot(1, n_metrics, i + 1)
         for j, model in enumerate(model_list):
-            if model == "dmix-nuts" and metric in ["n_steps", "runtime"]:
+            if model == "cmn-nuts" and metric in ["n_steps", "runtime"]:
                 continue
             ax.errorbar(
                 train_size_list,
@@ -318,7 +318,7 @@ def load_results(
                     df[m].str[int(len(m) + 1) :].to_numpy(dtype=float)
                 )
             # load runtime results
-            if model != "dmix-nuts":
+            if model != "cmn-nuts":
                 if data == "pinwheel":
                     filename = f"{data}/runtimes/{data}-{model}-layers=1-n_components={n_components}-hidden_dims={n_classes-1}-train_size={train_size}-test_size={test_size}-n_classes={n_classes}-runtimes.txt"
                 else:

@@ -17,7 +17,7 @@ from .models import Sequential, ConditionalMixture, ConditionalMixtureNetwork
 from .transforms import MultinomialRegression
 
 
-def dmix_layer(
+def cmix_layer(
     linear_key,
     mnlr_key,
     batch_shape,
@@ -110,7 +110,7 @@ def initialize_network(
     fixed_precision,
     likelihood_type,
     n_backwards_iters,
-    dmix_optim_args,
+    cmix_optim_args,
     mnlr_optim_args,
     compute_elbo=True,
 ):
@@ -121,7 +121,7 @@ def initialize_network(
         elif layer_i >= 1:
             in_dim, out_dim = hidden_dims[layer_i - 1], hd
 
-        layer = dmix_layer(
+        layer = cmix_layer(
             linear_keys[layer_i],
             mnlr_keys[layer_i],
             batch_shape,
@@ -137,7 +137,7 @@ def initialize_network(
             scale_mnlr_betas=scale_mnlr_betas[layer_i],
             init_posterior_scale=init_posterior_scale[layer_i],
             sample_initial_betas=sample_initial_betas[layer_i],
-            **dmix_optim_args,
+            **cmix_optim_args,
         )
         layers.append(layer)
 

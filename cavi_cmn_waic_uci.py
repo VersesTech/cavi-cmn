@@ -70,7 +70,7 @@ def parse_args():
     # number of variational bayes iterations for the MNLR output layer
     parser.add_argument("--n_vb_iters_mnlr", nargs="+", type=int)
 
-    # scale of U^{-1} of the inverse Wishart (Gamma) prior within the MNIW (MNG) of the dmix layer
+    # scale of U^{-1} of the inverse Wishart (Gamma) prior within the MNIW (MNG) of the conditional mixture layer
     parser.add_argument("--scale_likelihood", default=1.0, type=float)
 
     # scale argument of the mnlr (standard deviation of the `self.prior_inv_sigma_mu` term)
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     key = jr.PRNGKey(args.seed)
     data_key, model_key = jr.split(key)
-    dmix_key, mnlr_key = jr.split(model_key)
+    cmix_key, mnlr_key = jr.split(model_key)
 
     (x, y), stats = create_uci_dataloader(
         data_key,
@@ -192,8 +192,8 @@ if __name__ == "__main__":
         "n_classes"
     ]  # number of classes in the output (regressand dimension)
 
-    num_dmix_layers = 1
-    num_layers = num_dmix_layers + args.add_mnlr_output
+    num_cmix_layers = 1
+    num_layers = num_cmix_layers + args.add_mnlr_output
     hidden_dim = n_classes - 1
 
     print(f"Dataset={args.data}: n_classes={n_classes}")
@@ -207,13 +207,13 @@ if __name__ == "__main__":
     hidden_dims = [hidden_dim] * num_layers
 
     # number of components (discrete latents) in the single hidden (Directed Mixture) layer of the model
-    n_components = [args.n_components] * num_dmix_layers
+    n_components = [args.n_components] * num_cmix_layers
 
     if not os.path.exists("./logging/"):
         os.makedirs("./logging/")
-    exp_name = f"{args.data}-cavi-cmn-layers={num_dmix_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-n_classes={n_classes}"
+    exp_name = f"{args.data}-cavi-cmn-layers={num_cmix_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-n_classes={n_classes}"
 
-    dmix_optim_args = {
+    cmix_optim_args = {
         "learning_rate_linear": args.lr_linear,
         "batch_decay_linear": args.beta_linear,
         "learning_rate_mnlr": args.lr_mnlr,
@@ -226,7 +226,7 @@ if __name__ == "__main__":
     }
 
     mnlr_keys = jr.split(mnlr_key, num_layers)
-    linear_keys = jr.split(dmix_key, num_dmix_layers)
+    linear_keys = jr.split(cmix_key, num_cmix_layers)
 
     # initialize the model
     model = initialize_network(
@@ -248,7 +248,7 @@ if __name__ == "__main__":
         args.fixed_precision,
         args.likelihood_type,
         args.n_backwards_iters,
-        dmix_optim_args,
+        cmix_optim_args,
         mnlr_optim_args,
     )
 

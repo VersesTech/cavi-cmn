@@ -145,7 +145,7 @@ if __name__ == "__main__":
     x_train, y_train = next(iter(train_dataloader))
     x_test, y_test = next(iter(test_dataloader))
 
-    fit_dmix_bbvi_one_model = partial(
+    fit_cmn_bbvi_one_model = partial(
         fit_cmn_bbvi,
         x_train=x_train,
         y_train=y_train,
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     )
 
     # initializes and fits (using gradient descent on the log likelihood of the model) a set of `n_models` independently-initialized Mixture-of-Experts networks on the training data
-    train_acc, test_acc, lpd, ece, res, _ = vmap(fit_dmix_bbvi_one_model)(n_model_keys)
+    train_acc, test_acc, lpd, ece, res, _ = vmap(fit_cmn_bbvi_one_model)(n_model_keys)
 
     print(
         f"Average train / test accuracy: {train_acc.mean():.3f} / {test_acc.mean():.3f}, LPD: {lpd.mean():.3f}, ECE: {ece.mean():.3f}"
@@ -223,7 +223,7 @@ if __name__ == "__main__":
         x_train, y_train = next(iter(train_dataloader))
         x_test, y_test = next(iter(test_dataloader))
 
-        fit_dmix_bbvi_one_model = partial(
+        fit_cmn_bbvi_one_model = partial(
             fit_cmn_bbvi,
             x_train=x_train,
             y_train=y_train,
@@ -239,10 +239,10 @@ if __name__ == "__main__":
             prob_type=prob_type,
             grid=None,
         )
-        _, _, _, _, _, _ = fit_dmix_bbvi_one_model(model_key)
+        _, _, _, _, _, _ = fit_cmn_bbvi_one_model(model_key)
 
         time_start = time.time()
-        _, _, _, _, _, _ = fit_dmix_bbvi_one_model(model_key)
+        _, _, _, _, _, _ = fit_cmn_bbvi_one_model(model_key)
         time_end = time.time()
         runtime_per_iter = (time_end - time_start) / args.n_iters_runtime
 

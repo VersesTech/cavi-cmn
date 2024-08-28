@@ -246,7 +246,7 @@ class ConditionalMixture(Model):
 
     def forward_from_normal(self, pX):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: Distribution
         :return: MixtureMessage (Distribution)
         """
@@ -257,7 +257,7 @@ class ConditionalMixture(Model):
 
     def forward_avg_natparams(self, pX: MixtureMessage):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: MixtureMessage (Distribution)
         :return: MixtureMessage (Distribution)
 
@@ -270,7 +270,7 @@ class ConditionalMixture(Model):
 
     def forward_avg_statistics(self, pX: MixtureMessage):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: MixtureMessage (Distribution)
         :return: MixtureMessage (Distribution)
 
@@ -284,7 +284,7 @@ class ConditionalMixture(Model):
     @multimethod
     def forward(self, pX: MixtureMessage):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: MixtureMessage (Distribution)
         :return: MixtureMessage (Distribution)
 
@@ -300,7 +300,7 @@ class ConditionalMixture(Model):
     @multimethod
     def forward_old(self, pX: Distribution):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: ExponentialFamily (Distribution)
         :return: MixtureMessage
         """
@@ -321,7 +321,7 @@ class ConditionalMixture(Model):
     @multimethod
     def forward(self, pX: Distribution):
         """
-        Forward message for dMixture of linear transforms
+        Forward message for Conditional mixture of linear transforms
         :param pX: ExponentialFamily (Distribution)
         :return: MixtureMessage
         """
@@ -365,7 +365,7 @@ class ConditionalMixture(Model):
     @multimethod
     def backward(self, pY: MixtureMessage):
         """
-        Backward message for dMixture of linear transforms
+        Backward message for Conditional mixture of linear transforms
         :param pY: MixtureMessage (Distribution)
         :return: MixtureMessage (Distribution)
         """
@@ -422,7 +422,7 @@ class ConditionalMixture(Model):
     @multimethod
     def backward_old(self, pY: MixtureMessage, collapsed=False, version_1=True):
         """
-        Backward message for dMixture of linear transforms
+        Backward message for Conditional mixture of linear transforms
         :param pY: MixtureMessage (Distribution)
         :param collapsed: bool
         :param version_1: bool
