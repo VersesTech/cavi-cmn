@@ -1,6 +1,4 @@
 ﻿VERSES Academic Research License
-This license lets other researchers modify your source code and share it with other researchers provided they credit you for the original software and license under these same terms. Recommended for maximum freedom of other academic and non-commercial researchers.
-
 
 VERSES Academic / Nonprofit Research License: © 2024 VERSES AI, Inc (“VERSES”). Academic or nonprofit researchers are permitted to use this Software (as defined below) in the manner specifically described herein, subject to Paragraphs 1-4 below:
 
