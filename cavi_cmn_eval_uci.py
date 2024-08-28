@@ -6,27 +6,16 @@
 
 import jax
 from jax import numpy as jnp
-from jax import random as jr, config, nn, vmap, device_put
-from jax.numpy import expand_dims as expand
+from jax import random as jr, nn
 from jax.scipy.special import logsumexp
-from jax.scipy.linalg import solve_triangular
 
-from cavi_cmn.transforms import MultinomialRegression
 from cavi_cmn.model_utils import initialize_network
-from cavi_cmn.exponential import MixtureMessage, MultivariateNormal, Multinomial
-
-from benchmarks import create_uci_dataloader, find_uci_stats, check_convergence_expfit
+from benchmarks import create_uci_dataloader, check_convergence_expfit
 
 import os
 import time
 import argparse
 import warnings
-import numpy as np
-from functools import partial
-from torchvision import transforms
-from collections import defaultdict
-import seaborn as sns
-from matplotlib import pyplot as plt
 from tensorflow_probability.substrates import jax as tfp
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
@@ -228,8 +217,8 @@ if __name__ == "__main__":
     # number of components (discrete latents) in the single hidden (Directed Mixture) layer of the model
     n_components = [args.n_components] * num_dmix_layers
 
-    if not os.path.exists("./examples/benchmarks/logging/"):
-        os.makedirs("./examples/benchmarks/logging/")
+    if not os.path.exists("./logging/"):
+        os.makedirs("./logging/")
     exp_name = f"{args.data}-cavi-cmn-layers={num_dmix_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-train_size={args.train_size}-n_classes={n_classes}"
 
     cmn_optim_args = {
@@ -340,7 +329,7 @@ if __name__ == "__main__":
 
     if args.log_metrics:
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-metrics" + ".txt",
+            "./logging/" + exp_name + f"-metrics" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
@@ -436,7 +425,7 @@ if __name__ == "__main__":
         )
 
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-runtimes" + ".txt",
+            "./logging/" + exp_name + f"-runtimes" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
