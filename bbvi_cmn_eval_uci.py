@@ -6,12 +6,10 @@
 
 import jax
 from jax import numpy as jnp
-from jax import random as jr, config, nn, vmap
-from jax.numpy import expand_dims as expand
+from jax import random as jr, vmap
 
 from benchmarks import (
     create_uci_dataloader,
-    find_uci_stats,
     fit_cmn_bbvi,
     check_convergence_expfit,
 )
@@ -19,13 +17,7 @@ from benchmarks import (
 import os
 import time
 import argparse
-import warnings
-import numpy as np
 from functools import partial
-from torchvision import transforms
-from collections import defaultdict
-import seaborn as sns
-from matplotlib import pyplot as plt
 
 
 def parse_args():
@@ -86,8 +78,8 @@ def parse_args():
     # beta scale
     parser.add_argument("--scale_beta", "-sb", default=5.0, type=float)
 
-    # number of nvi samples for prediction
-    parser.add_argument("--num_nvi_samples", "-nns", default=64, type=int)
+    # number of svi samples for prediction
+    parser.add_argument("--num_svi_samples", "-nss", default=64, type=int)
 
     # floating-point precision config
     parser.add_argument(
@@ -137,7 +129,7 @@ if __name__ == "__main__":
 
     print(f"Dataset={args.data}: train_size={args.train_size}, n_classes={n_classes}")
     print(
-        f"Two Layer BBVI-CMN: components={args.n_components}, hidden_dim={hidden_dim}, n_models={args.n_models}, n_iters={args.n_iters}, n_samples={args.num_nvi_samples}, lr={args.lr}, floating point dtype: {int(args.precision[-2:])}"
+        f"Two Layer BBVI-CMN: components={args.n_components}, hidden_dim={hidden_dim}, n_models={args.n_models}, n_iters={args.n_iters}, n_samples={args.num_svi_samples}, lr={args.lr}, floating point dtype: {int(args.precision[-2:])}"
     )
 
     # number of hidden units (continuous latents) in the single hidden (Directed Mixture) layer of the model
@@ -146,8 +138,8 @@ if __name__ == "__main__":
     # number of components (discrete latents) in the single hidden (Directed Mixture) layer of the model
     n_components = [args.n_components] * num_layers
 
-    if not os.path.exists("./examples/benchmarks/logging/"):
-        os.makedirs("./examples/benchmarks/logging/")
+    if not os.path.exists("./logging/"):
+        os.makedirs("./logging/")
     exp_name = f"{args.data}-bbvi-cmn-layers={num_layers}-n_components={args.n_components}-hidden_dims={hidden_dim}-train_size={args.train_size}-n_classes={n_classes}"
 
     x_train, y_train = next(iter(train_dataloader))
@@ -179,7 +171,7 @@ if __name__ == "__main__":
 
     if args.log_metrics:
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-metrics" + ".txt",
+            "./logging/" + exp_name + f"-metrics" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
@@ -259,7 +251,7 @@ if __name__ == "__main__":
         )
 
         fout = open(
-            "./examples/benchmarks/logging/" + exp_name + f"-runtimes" + ".txt",
+            "./logging/" + exp_name + f"-runtimes" + ".txt",
             mode="a+",
         )
         for model_i in range(args.n_models):
