@@ -17,5 +17,5 @@ from .conditional_mixture_network import (
     compute_log_likelihood_nuts,
 )
 
-from .utils import check_convergence_expfit
-from .data import create_uci_dataloader, find_uci_stats
+from .utils import check_convergence_expfit, grid_of_points, plot_dataset
+from .data import create_uci_dataloader, find_uci_stats, create_pinwheel_generator
