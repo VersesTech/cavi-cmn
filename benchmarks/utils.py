@@ -208,7 +208,7 @@ def plot_dataset(
     plt.ylim([-3.5, 3.5])
     plt.legend(title="Class", title_fontsize="13", loc="upper right", fontsize="12")
     if exp_name is not None:
-        plt.savefig("./examples/benchmarks/plots/" + exp_name + ".png")
+        plt.savefig("./plots/" + exp_name + ".png")
     # plt.show()
 
 
