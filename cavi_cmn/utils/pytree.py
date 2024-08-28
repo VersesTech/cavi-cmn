@@ -1,3 +1,9 @@
+# This code is part of the VersesTech Repository `cavi-cmn` (https://github.com/VersesTech/cavi-cmn).
+# It is licensed under the VERSES Academic Research License.
+#
+# For more information, please refer to the license file:
+# https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
+
 from collections.abc import Callable, Sequence
 from typing import Any, Optional, TYPE_CHECKING, Union
 
@@ -207,7 +213,7 @@ def tree_equal(
     atol=0.0,
 ):
     """
-    TODO: take from equinox - rewrite / credit
+    This is taken from the equinox package: https://github.com/patrick-kidger/equinox
     """
     flat, treedef = jtu.tree_flatten(pytrees[0])
     traced_out = True
@@ -264,9 +270,6 @@ def _array_equal(x, y, rtol, atol):
         return npi.allclose(x, y, rtol=rtol, atol=atol)
 
 
-# Copy from equionox package --- Apache 2.0 Licence
-
-
 class _LeafWrapper:
     def __init__(self, value: Any):
         self.value = value
@@ -308,7 +311,9 @@ def tree_at(
     replace_fn: Callable[[Any], Any] = None,
     is_leaf: Optional[Callable[[Any], bool]] = None,
 ):
-    """Modifies a leaf or subtree of a PyTree. (A bit like using `.at[].set()` on a JAX
+    """This is taken from the equinox package: https://github.com/patrick-kidger/equinox
+
+    Modifies a leaf or subtree of a PyTree. (A bit like using `.at[].set()` on a JAX
     array.)
 
     The modified PyTree is returned and the original input is left unchanged. Make sure

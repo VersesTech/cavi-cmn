@@ -1,3 +1,9 @@
+# This code is part of the VersesTech Repository `cavi-cmn` (https://github.com/VersesTech/cavi-cmn).
+# It is licensed under the VERSES Academic Research License.
+#
+# For more information, please refer to the license file:
+# https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
+
 """
 Transforms are distributions that are conditioned on latents.  They model p(y|x,\theta)
 where y is the event, x is the input_event, and \theta gives the parameters.  When x and y 
