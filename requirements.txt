@@ -1,3 +1,4 @@
+jax==0.4.23
 jaxlib==0.4.23
 jaxtyping==0.2.23
 ucimlrepo==0.0.6
@@ -22,7 +23,8 @@ scikit-learn==1.4.2
 scipy==1.11.3
 seaborn==0.13.1
 PyYAML==6.0.1
-torchvision==0.16.2
+torchvision
 ucimlrepo==0.0.6
 pyparsing==3.1.1
-torch==2.1.2
+torch
+certifi
