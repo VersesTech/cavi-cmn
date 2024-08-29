@@ -1,8 +1,17 @@
-# This code is part of the VersesTech Repository `cavi-cmn` (https://github.com/VersesTech/cavi-cmn).
-# It is licensed under the VERSES Academic Research License.
+# Copyright 2024 VERSES AI, Inc.
 #
-# For more information, please refer to the license file:
-# https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
+# Licensed under the VERSES Academic Research License (the “License”);
+# you may not use this file except in compliance with the license.
+#
+# You may obtain a copy of the License at
+#
+#     https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 from .utils import ArrayDict
 from .exponential import ExponentialFamily
