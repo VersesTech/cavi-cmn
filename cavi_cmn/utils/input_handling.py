@@ -5,7 +5,7 @@
 #
 # You may obtain a copy of the License at
 #
-#     https://github.com/VersesTech/cavi-cmn/blob/main/license.txt
+#     https://github.com/VersesTech/cavi-cmn/blob/main/LICENSE.txt
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
