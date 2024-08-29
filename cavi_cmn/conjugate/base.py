@@ -142,7 +142,7 @@ class Conjugate(Distribution):
     @prior_params.setter
     def prior_params(self, value: ArrayDict):
         self._prior_params = value
-        self._update_cache()  # Jeff hack
+        self._update_cache()
 
     def expand(self, shape: tuple):
         """

@@ -95,9 +95,7 @@ class ConditionalMixture(Model):
 
         self.likelihood = likelihood
         self.pi = pi
-        _ = (
-            self.pi.beta.expectations
-        )  # this is how Hao ensured that there were no `None`-valued leaves in the `self.pi` Pytree, which gets passsed into `lax.scan`
+        _ = self.pi.beta.expectations
 
     def update_from_data(self, inputs: Tuple[Array], iters: int = 1):
         self.likelihood, self.pi, elbo = self._update_from_data(
@@ -486,7 +484,7 @@ class ConditionalMixture(Model):
 
         # logZ = logsumexp(log_p, axis=-1, keepdims=True)
         p = Cat(ArrayDict(logits=log_p))
-        # pX.residual = logZ # added this logZ into the residual to be consistent with original way Jeff did it
+        # pX.residual = logZ # added this logZ into the residual to be consistent with original way we were doing it
 
         return MixtureMessage(
             likelihood=pX, assignments=p, average_type=self.average_type

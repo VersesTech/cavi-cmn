@@ -255,7 +255,7 @@ class Linear(Transform):
             batch_shape + event_shape[:-default_event_dim] + (1, 1),
             1.0
             + y_dim
-            + dof_offset,  # NOTE: defining n = 1.0 + dim means expected_sigma() is undefined. In the past, Jeff has used n = 2.0 + dim to address this
+            + dof_offset,  # NOTE: defining n = 1.0 + dim means expected_sigma() is undefined. We have used n = 2.0 + dim to address this
         )  # shape should be (batch_shape,) + (1, 1)
         prior_inv_v = inv_v_scale * jnp.broadcast_to(
             jnp.eye(x_dim),
@@ -1043,8 +1043,8 @@ class Linear(Transform):
     ) -> Distribution:
         # uses definition of residual where nat_params*T(x) + residual + log_measure(y) = <log p(y|x,A,\Sigma)>_{q(A,\Sigma)q(y)}
         # this is different from the variational_backward residual definition which includes the log partition function of the
-        # backward likelihood.  Jeff thinks this should not be done because this is a likelhood function not a posterior
-        #
+        # backward likelihood.
+
         res = 0.5 * self.expected_logdet_inv_sigma().squeeze((-2, -1))
         inv_sigma = self.expected_inv_sigma()
         res -= 0.5 * jnp.sum(inv_sigma * pY.expected_xx(), (-2, -1))  # yy term
