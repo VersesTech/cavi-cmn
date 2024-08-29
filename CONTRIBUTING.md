@@ -6,7 +6,7 @@ Thank you for considering contributing to **cavi-cmn**! We appreciate your inter
 
 ### 1. Reporting Issues
 
-If you find a bug, have a feature request, or need help, please [open an issue](link-to-issues-page) and provide the following details:
+If you find a bug, have a feature request, or need help, please [open an issue](https://github.com/VersesTech/cavi-cmn/issues) and provide the following details:
 - A clear and descriptive title
 - Steps to reproduce the issue (if applicable)
 - The expected behavior
