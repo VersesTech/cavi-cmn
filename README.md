@@ -1,7 +1,7 @@
 # cavi-cmn
 
 
-This repository contains code accompanying the preprint: ["Gradient-free variational learning with conditional mixture networks"](https://arxiv.org)
+This repository contains code accompanying the preprint: ["Gradient-free variational learning with conditional mixture networks"](https://arxiv.org/abs/2408.16429)
 
 ## Installation
 
