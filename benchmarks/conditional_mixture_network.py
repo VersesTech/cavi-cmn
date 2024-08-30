@@ -856,9 +856,10 @@ def fit_cmn_nuts(
 
         keys = jr.split(key, num_nuts_samples * num_chains + 1)
         key = keys[-1]
-        logits = vmap(logits_fn)(keys[:-1], post_samples)
-
-        logits = logsumexp(logits - jnp.log(num_nuts_samples * num_chains), axis=0)
+        logits = vmap(logits_fn)(keys[:-1], post_samples).reshape(
+        num_chains, num_nuts_samples, len(grid), num_classes
+    )
+        logits = logsumexp(logits - jnp.log(num_nuts_samples), axis=1)
         logits = logits - logsumexp(logits, -1, keepdims=True)
         grid_predicted_class = logits.argmax(-1)
     else:
