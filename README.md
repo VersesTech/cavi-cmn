@@ -1,7 +1,6 @@
 # cavi-cmn
 
-
-This repository contains code accompanying the preprint: ["Gradient-free variational learning with conditional mixture networks"](https://arxiv.org/abs/2408.16429)
+This repository contains code accompanying the preprint: ["Gradient-free variational learning with conditional mixture networks"](https://arxiv.org/abs/2408.16429) by Conor Heins (@conorheins), Hao Wu (@hao-w), Dimitrije Markovic (@dimarkov), Alexander Tschantz (@alec-tschantz), Jeff Beck (@bayesianempirimancer) and Christopher Buckley.
 
 ## Installation
 
@@ -120,6 +119,17 @@ python mle_cmn_waic_uci.py --data=[dataset_name] --<mle_specific_param>=[param_v
 ```
 
 Each script trains and evaluates the WAIC score using the entirety of the chosen UCI dataset. Therefore, there are no arguments like `train_size` or `test_size` for the WAIC scripts, but there are of course model-specific hyperparameters.
+
+If you use or cite CAVI-CMN in your own work, please consider citing it with:
+
+```
+@article{heins2024gradient,
+  title={Gradient-free variational learning with conditional mixture networks},
+  author={Heins, Conor and Wu, Hao and Markovic, Dimitrije and Tschantz, Alexander and Beck, Jeff and Buckley, Christopher},
+  journal={arXiv preprint arXiv:2408.16429},
+  year={2024}
+}
+```
 
 ## License
 
